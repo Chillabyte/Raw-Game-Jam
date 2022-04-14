@@ -1,0 +1,77 @@
+/* Layout */
+#game-board-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: linen;
+    width: 672px;
+    height: 416;
+}
+.row{
+    display: flex;
+}
+
+/* Tiles */
+#player{
+    transition: ease-in-out .25s;
+    opacity: 0;
+    border: 0;
+    z-index: 50;
+    position: absolute;
+    background-color: transparent;
+    top: 0px;
+    left: 0px;
+}
+.tile{
+    image-rendering: pixelated;
+    z-index: 0;    
+    display: block;
+    background: url(../assets/SpriteSheet.png) no-repeat;
+    height: 16px;
+    width: 16px;
+}
+.floor_0{
+    opacity: .25;
+    background-position: 0 -80px;
+}
+.floor_1{
+    opacity: .25;
+    background-position: -16px -80px;
+}
+.floor_2{
+    opacity: .25;
+    background-position: -32px -80px;
+}
+.floor_3{
+    opacity: .25;
+    background-position: -48px -80px;
+}
+.wall_0{
+    opacity: .5;
+    background-position: 0 -16px;
+}
+.wall_1{
+    opacity: .5;
+    background-position: -16px -16px;
+}
+.wall_2{
+    opacity: .5;
+    background-position: -32px -16px;
+}
+.wall_3{
+    opacity: .5;
+    background-position: -48px -16px;
+}
+
+/* Rotation */
+.rotate_1{
+    transform: rotate(90deg);
+}
+
+.rotate_2{
+    transform: rotate(180deg)
+}
+
+.rotate_3{
+    transform: rotate(2700deg)
+}
