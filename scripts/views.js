@@ -1,8 +1,7 @@
 class Views {
-    constructor(tilePixelSize) {
+    constructor(tilePixelSize, spriteSheetUrl) {
         this.elements = new HtmlElements();
-        this.sprites = new Sprites();
-        this.tilePixelSize = tilePixelSize;
+        this.spriteSheet = new SpriteSheet(tilePixelSize, spriteSheetUrl);
     }
 
     playerVisible(visible) {
@@ -12,8 +11,8 @@ class Views {
     movePlayer(left, top) {
         const transitionTime = parseFloat(getComputedStyle(this.elements.player)["transitionDuration"]);
         const player = this.elements.player;
-        this.elements.player.style.top = `${top * this.sprites.pixelSize}px`;
-        this.elements.player.style.left = `${left * this.sprites.pixelSize}px`;
+        this.elements.player.style.top = `${top * this.spriteSheet.pixelSize}px`;
+        this.elements.player.style.left = `${left * this.spriteSheet.pixelSize}px`;
         player.style.transform = `scale(.75)`;
         setTimeout(function () {
             player.style.transform = `scale(1)`;
@@ -23,7 +22,7 @@ class Views {
     bumpPlayer(xChange, yChange) {
         const transitionTime = parseFloat(getComputedStyle(this.elements.player)["transitionDuration"]);
         const player = this.elements.player;
-        player.style.transform = `translate(${xChange *  this.sprites.pixelSize*.5}px, ${yChange * this.sprites.pixelSize*.5}}px) scale(.75)`;
+        player.style.transform = `translate(${xChange *  this.spriteSheet.pixelSize*.5}px, ${yChange * this.sprites.pixelSize*.5}}px) scale(.75)`;
         setTimeout(function () {
             player.style.transform = `translate(0, 0) scale(1)`;
         }, Math.floor(transitionTime * 400));
@@ -32,23 +31,27 @@ class Views {
 
     showAllSprites(){
         let tiles = document.getElementsByClassName('tile');
+        console.log(tiles);
 
-        tiles.forEach(elem => {
-            let spriteName = this.sprites[elem.dataset.sprite];
+        Array.prototype.forEach.call(tiles, elem => {
+            console.log('one');
+            let spriteCoords = this.spriteSheet.sprites[elem.dataset.sprite];
+            console.log(elem.dataset.sprite)
+            console.log(spriteCoords);
             let xCoord;
             let yCoord;
-
-            xCoord = this.sprites.pixelSize*this.sprites[spriteName]*-1;
-            yCoord= this.sprites.pixelSize*this.sprites[spriteName].col*-1;
+            console.log(spriteCoords.row);
+            xCoord = this.spriteSheet.pixelSize*spriteCoords.row*-1;
+            yCoord= this.spriteSheet.pixelSize*spriteCoords.col*-1;
             
-            elem.css(`background-position:${xCoord}px ${yCoord}px`);            
+            elem.style(`background-position:${xCoord}px ${yCoord}px`);            
         });
     }
 
     showSprites(spriteName){
         let tiles = document.querySelectorAll(`[data-foo="${spriteName}"]`);
-        let xCoord = this.sprites.pixelSize*this.sprites[spriteName].col*-1;
-        let yCoord = this.sprites.pixelSize*this.sprites[spriteName].col*-1;
+        let xCoord = this.spriteSheet.pixelSize*this.spriteSheet.sprites[spriteName].row*-1;
+        let yCoord = this.spriteSheet.pixelSize*this.spriteSheet.sprites[spriteName].col*-1;
         tiles.forEach(elem => {
             elem.css(`background-position:${xCoord}px ${yCoord}px`);            
         });
@@ -62,7 +65,7 @@ class HtmlElements {
     }
 }
 
-class Sprites {
+class SpriteSheet {
     constructor(pixelSize, spriteSheetUrl) {
         this.pixelSize = pixelSize;
         this.spriteSheetUrl = spriteSheetUrl;

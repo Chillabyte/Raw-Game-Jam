@@ -1,7 +1,7 @@
 class GameController{
     constructor(width, height, tilePixelSize = 16 ){
         this.addEventListeners();
-        this.views = new Views(tilePixelSize);
+        this.views = new Views(tilePixelSize, '..//assets//SpriteSheet.png');
         this.models = new Models(height, width);  
     }
 

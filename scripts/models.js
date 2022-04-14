@@ -35,9 +35,11 @@ class GameBoardModel{
                 if(border || randWall){
                     cell.setAttribute("class", `tile wall_${randNum} rotate_${randRotation}`);
                     cell.setAttribute("data-collision", "blocked");
+                    cell.setAttribute("data-sprite", `wall_${randNum}`);
                 }else{
                     cell.setAttribute("class", `tile floor_${randNum} rotate_${randRotation} open`);
                     cell.setAttribute("data-collision", "none");
+                    cell.setAttribute("data-sprite", `floor_${randNum}`);
                 }
 
 
