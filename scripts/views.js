@@ -26,7 +26,12 @@ class Views {
         setTimeout(function () {
             player.style.transform = `translate(0, 0) scale(1)`;
         }, Math.floor(transitionTime * 400));
+    }
 
+    showGameBoard(gridWidth, gridHeight){
+        let board = document.getElementById("game-board-container")
+        board.style.height = `${gridHeight * this.spriteSheet.pixelSize}px`;
+        board.style.width = `${gridWidth * this.spriteSheet.pixelSize}px`;
     }
 
     showAllSprites(){
@@ -41,10 +46,12 @@ class Views {
             let xCoord;
             let yCoord;
             console.log(spriteCoords.row);
-            xCoord = this.spriteSheet.pixelSize*spriteCoords.row*-1;
-            yCoord= this.spriteSheet.pixelSize*spriteCoords.col*-1;
+            xCoord = this.spriteSheet.pixelSize*spriteCoords.col*-1;
+            yCoord= this.spriteSheet.pixelSize*spriteCoords.row*-1;
             
-            elem.style(`background-position:${xCoord}px ${yCoord}px`);            
+            elem.style.backgroundPosition = `${xCoord}px ${yCoord}px`;
+            elem.style.height =`${this.spriteSheet.pixelSize}px`;
+            elem.style.width =`${this.spriteSheet.pixelSize}px`;   
         });
     }
 
@@ -72,14 +79,14 @@ class SpriteSheet {
         this.sprites = {
             'init': { row: 0, col: 0 },
             'player': { row: 0, col: 1 },
-            'wall_1': { row: 3, col: 0 },
-            'wall_2': { row: 3, col: 1 },
-            'wall_3': { row: 3, col: 2 },
-            'wall_4': { row: 3, col: 3 },
-            'floor_1': { row:6, col: 0 },
-            'floor_2': { row:6, col: 1 },
-            'floor_3': { row:6, col: 2 },
-            'floor_4': { row:6, col: 3 },
+            'wall_0': { row: 4, col: 0 },
+            'wall_1': { row: 4, col: 1 },
+            'wall_2': { row: 4, col: 2 },
+            'wall_3': { row: 4, col: 3 },
+            'floor_0': { row:6, col: 0 },
+            'floor_1': { row:6, col: 1 },
+            'floor_2': { row:6, col: 2 },
+            'floor_3': { row:6, col: 3 },
         }
     }
 }

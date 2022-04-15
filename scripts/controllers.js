@@ -1,5 +1,5 @@
 class GameController{
-    constructor(width, height, tilePixelSize = 16 ){
+    constructor(width, height, tilePixelSize){
         this.addEventListeners();
         this.views = new Views(tilePixelSize, '..//assets//SpriteSheet.png');
         this.models = new Models(height, width);  
@@ -13,6 +13,7 @@ class GameController{
         this.models.openTiles = document.getElementsByClassName("open");
         const view = this.views;
         setTimeout(function(){ view.playerVisible(true); }, transitionTime * 1000);
+        view.showGameBoard(this.models.board.width, this.models.board.height);
         view.showAllSprites();
     }
 
