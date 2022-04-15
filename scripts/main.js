@@ -1,4 +1,5 @@
 window.onload = function() {
-    const gameController = new GameController(42, 26, 16);
+    let tileSize = 16;
+    const gameController = new GameController(tileSize);
     gameController.startGame();
   }

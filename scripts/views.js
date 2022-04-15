@@ -36,16 +36,11 @@ class Views {
 
     showAllSprites(){
         let tiles = document.getElementsByClassName('tile');
-        console.log(tiles);
 
         Array.prototype.forEach.call(tiles, elem => {
-            console.log('one');
             let spriteCoords = this.spriteSheet.sprites[elem.dataset.sprite];
-            console.log(elem.dataset.sprite)
-            console.log(spriteCoords);
             let xCoord;
             let yCoord;
-            console.log(spriteCoords.row);
             xCoord = this.spriteSheet.pixelSize*spriteCoords.col*-1;
             yCoord= this.spriteSheet.pixelSize*spriteCoords.row*-1;
             
@@ -79,6 +74,7 @@ class SpriteSheet {
         this.sprites = {
             'init': { row: 0, col: 0 },
             'player': { row: 0, col: 1 },
+            'potion': {row:3, col:0 },
             'wall_0': { row: 4, col: 0 },
             'wall_1': { row: 4, col: 1 },
             'wall_2': { row: 4, col: 2 },
