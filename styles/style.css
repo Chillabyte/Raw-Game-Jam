@@ -1,7 +1,6 @@
 /* Layout */
 #game-board-container{
     position: relative;
-
     background-color: linen;
     background-image: url(../assets/background.png);
 
@@ -11,7 +10,7 @@
 }
 
 /* Tiles */
-#player{
+#player, .item, .enemy{
     transition: ease-in-out .25s;
     opacity: 0;
     border: 0;

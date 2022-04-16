@@ -8,7 +8,7 @@ class GameController{
     startGame(){
         const transitionTime = parseFloat(getComputedStyle(this.views.elements.player)["transitionDuration"]);
         this.models.initializeBoard(this.views.elements.gameBoard, "template");
-        this.movePlayer(Math.floor(this.models.board.width/2), Math.floor(this.models.board.height/2), true);
+        this.movePlayer(0,0,true);
         this.models.blockedTiles = document.getElementsByClassName("blocked");
         this.models.openTiles = document.getElementsByClassName("open");
         const view = this.views;

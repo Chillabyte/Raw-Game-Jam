@@ -11,8 +11,8 @@ class Views {
     movePlayer(left, top) {
         const transitionTime = parseFloat(getComputedStyle(this.elements.player)["transitionDuration"]);
         const player = this.elements.player;
-        this.elements.player.style.top = `${top * this.spriteSheet.pixelSize}px`;
-        this.elements.player.style.left = `${left * this.spriteSheet.pixelSize}px`;
+        player.style.top = `${top * this.spriteSheet.pixelSize}px`;
+        player.style.left = `${left * this.spriteSheet.pixelSize}px`;
         player.style.transform = `scale(.75)`;
         setTimeout(function () {
             player.style.transform = `scale(1)`;
@@ -22,10 +22,10 @@ class Views {
     bumpPlayer(xChange, yChange) {
         const transitionTime = parseFloat(getComputedStyle(this.elements.player)["transitionDuration"]);
         const player = this.elements.player;
-        player.style.transform = `translate(${xChange *  this.spriteSheet.pixelSize*.5}px, ${yChange * this.sprites.pixelSize*.5}}px) scale(.75)`;
+        player.style.transform = `translate(${xChange *  this.spriteSheet.pixelSize*.25}px, ${yChange * this.spriteSheet.pixelSize*.25}px) scale(.75)`;
         setTimeout(function () {
             player.style.transform = `translate(0, 0) scale(1)`;
-        }, Math.floor(transitionTime * 400));
+        }, Math.floor(transitionTime * 500));
     }
 
     showGameBoard(gridWidth, gridHeight){
@@ -63,7 +63,7 @@ class Views {
 class HtmlElements {
     constructor() {
         this.player = document.getElementById("player");
-        this.gameBoard = document.getElementById("game-board-container")
+        this.gameBoard = document.getElementById("game-board-container");
     }
 }
 
