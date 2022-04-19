@@ -10,7 +10,7 @@
 }
 
 /* Tiles */
-#player, .item, .enemy{
+#player, #wonder, #artifact{
     transition: ease-in-out .25s;
     opacity: 0;
     border: 0;

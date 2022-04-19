@@ -15,6 +15,7 @@ class GameController{
         setTimeout(function(){ view.playerVisible(true); }, transitionTime * 1000);
         view.showGameBoard(this.models.board.width, this.models.board.height);
         view.showAllSprites();
+        view.showForeground();
     }
 
     movePlayer(xChange, yChange, initialize = false){

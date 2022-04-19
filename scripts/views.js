@@ -34,6 +34,25 @@ class Views {
         board.style.width = `${gridWidth * this.spriteSheet.pixelSize}px`;
     }
 
+    showForeground(){
+
+        let artifactLocation = document.querySelectorAll(`[data-artifact="chest"`);
+        let xCoord=artifactLocation[0].id.split("-")[1];
+        let yCoord=artifactLocation[0].id.split("-")[2];
+        const artifact = this.elements.artifact;
+        artifact.style.top = `${this.spriteSheet.pixelSize*xCoord}px`;
+        artifact.style.left = `${this.spriteSheet.pixelSize*yCoord}px`;
+        artifact.style.opacity=1;
+
+        let wonderLocation = document.querySelectorAll(`[data-wonder="ant"`);
+        xCoord=wonderLocation[0].id.split("-")[1];
+        yCoord=wonderLocation[0].id.split("-")[2];
+        const wonder = this.elements.wonder;
+        wonder.style.top = `${this.spriteSheet.pixelSize*xCoord}px`;
+        wonder.style.left = `${this.spriteSheet.pixelSize*yCoord}px`;
+        wonder.style.opacity=1;
+    }
+
     showAllSprites(){
         let tiles = document.getElementsByClassName('tile');
 
@@ -51,7 +70,7 @@ class Views {
     }
 
     showSprites(spriteName){
-        let tiles = document.querySelectorAll(`[data-foo="${spriteName}"]`);
+        let tiles = document.querySelectorAll(`[data-sprite="${spriteName}"]`);
         let xCoord = this.spriteSheet.pixelSize*this.spriteSheet.sprites[spriteName].row*-1;
         let yCoord = this.spriteSheet.pixelSize*this.spriteSheet.sprites[spriteName].col*-1;
         tiles.forEach(elem => {
@@ -64,6 +83,8 @@ class HtmlElements {
     constructor() {
         this.player = document.getElementById("player");
         this.gameBoard = document.getElementById("game-board-container");
+        this.artifact = document.getElementById("artifact");
+        this.wonder=document.getElementById("wonder");
     }
 }
 
@@ -83,6 +104,8 @@ class SpriteSheet {
             'floor_1': { row:6, col: 1 },
             'floor_2': { row:6, col: 2 },
             'floor_3': { row:6, col: 3 },
+            'ant': {row: 12, col: 0},
+            'chest':{row: 3, col: 4}
         }
     }
 }
