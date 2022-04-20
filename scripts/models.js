@@ -14,17 +14,17 @@ class Models{
         let boardMap = this.maps[mapName];
         this.board.height = boardMap.length;
         this.board.width = boardMap[0].length;
-        for(let x=0; x<this.board.height; x++){
+        for(let y=0; y<this.board.height; y++){
             const row = document.createElement("div");
-            row.setAttribute("id", `row-${x}`);
-            row.setAttribute("class", "row")
+            row.setAttribute("id", `row-${y}`);
+            row.setAttribute("class", "row");
             boardView.appendChild(row);
-            for(let y=0; y<this.board.width; y++){
+            for(let x=0; x<this.board.width; x++){
                 const randNum = Math.floor(Math.random() * 4);
                 const randRotation = Math.floor(Math.random() * 4);
                 const cell = document.createElement("div");
-                cell.setAttribute("id", `cell-${x}-${y}`)
-
+                cell.setAttribute("id", `cell-${x}-${y}`);
+                console.log("x=[" + x + "] y=[" + y + "] value=[" + boardMap[x][y] + "]");
                 //add background information
                 switch(boardMap[x][y]) {
                     case '#': 
@@ -40,8 +40,8 @@ class Models{
                 //add background information
                 switch(boardMap[x][y]) {
                     case 'p':
-                        this.player.x = y; //somehow got these mixed up. I'll need to fix for real
-                        this.player.y = x;
+                        this.player.x = x;
+                        this.player.y = y;
                         break;
                     case 'w':
                         cell.setAttribute("data-wonder", "ant");
@@ -66,13 +66,10 @@ class GameBoardModel{
         this.openTiles;
     }
 
-
-
     checkCollision(YDestination, XDestination){
         const destinationCell = document.getElementById(`cell-${XDestination}-${YDestination}`);
         const collision = destinationCell.getAttribute("data-collision");
         return collision != "none"
-
     }
 }
 
@@ -87,9 +84,17 @@ class Maps{
     constructor()
     {
         this.template =[
+            ['#', '#', '#', '#', '#'],
+            ['#', 'p', 'w', 'a', '#'],
+            ['#', ' ', ' ', ' ', '#'],
+            ['#', ' ', ' ', ' ', '#'],
+            ['#', ' ', ' ', ' ', '#'],
+            ['#', '#', '#', '#', '#']
+        ],
+        this.template_1 = [
             ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
-            ['#', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '#'],
-            ['#', '  ', 'w', '  ','  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ','   ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '#'],
+            ['#', 'a', 'w', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '#'],
+            ['#', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '   ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '#'],
             ['#', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '#'],
             ['#', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '#'],
             ['#', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '#'],
@@ -112,7 +117,7 @@ class Maps{
             ['#', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '#'],
             ['#', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '#'],
             ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#']
-         ],
+        ],
         this.level_0 =[]
     }
 }
