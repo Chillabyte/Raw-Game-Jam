@@ -8,21 +8,21 @@ class Views {
         this.elements.player.style.opacity = visible ? 1 : 0;
     }
 
-    movePlayer(left, top) {
+    movePlayer(row, col) {
         const transitionTime = parseFloat(getComputedStyle(this.elements.player)["transitionDuration"]);
         const player = this.elements.player;
-        player.style.top = `${top * this.spriteSheet.pixelSize}px`;
-        player.style.left = `${left * this.spriteSheet.pixelSize}px`;
+        player.style.top = `${row * this.spriteSheet.pixelSize}px`;
+        player.style.left = `${col * this.spriteSheet.pixelSize}px`;
         player.style.transform = `scale(.75)`;
         setTimeout(function () {
             player.style.transform = `scale(1)`;
         }, Math.floor(transitionTime * 500));
     }
 
-    bumpPlayer(xChange, yChange) {
+    bumpPlayer(rowChange, colChange) {
         const transitionTime = parseFloat(getComputedStyle(this.elements.player)["transitionDuration"]);
         const player = this.elements.player;
-        player.style.transform = `translate(${xChange *  this.spriteSheet.pixelSize*.25}px, ${yChange * this.spriteSheet.pixelSize*.25}px) scale(.75)`;
+        player.style.transform = `translate(${colChange *  this.spriteSheet.pixelSize*.25}px, ${rowChange * this.spriteSheet.pixelSize*.25}px) scale(.75)`;
         setTimeout(function () {
             player.style.transform = `translate(0, 0) scale(1)`;
         }, Math.floor(transitionTime * 500));
@@ -37,19 +37,19 @@ class Views {
     showForeground(){
 
         let artifactLocation = document.querySelectorAll(`[data-artifact="chest"`);
-        let xCoord=artifactLocation[0].id.split("-")[1];
-        let yCoord=artifactLocation[0].id.split("-")[2];
+        let row=artifactLocation[0].id.split("-")[1];
+        let col=artifactLocation[0].id.split("-")[2];
         const artifact = this.elements.artifact;
-        artifact.style.top = `${this.spriteSheet.pixelSize*xCoord}px`;
-        artifact.style.left = `${this.spriteSheet.pixelSize*yCoord}px`;
+        artifact.style.top = `${this.spriteSheet.pixelSize*row}px`;
+        artifact.style.left = `${this.spriteSheet.pixelSize*col}px`;
         artifact.style.opacity=1;
 
         let wonderLocation = document.querySelectorAll(`[data-wonder="ant"`);
-        xCoord=wonderLocation[0].id.split("-")[1];
-        yCoord=wonderLocation[0].id.split("-")[2];
+        row=wonderLocation[0].id.split("-")[1];
+        col=wonderLocation[0].id.split("-")[2];
         const wonder = this.elements.wonder;
-        wonder.style.top = `${this.spriteSheet.pixelSize*xCoord}px`;
-        wonder.style.left = `${this.spriteSheet.pixelSize*yCoord}px`;
+        wonder.style.top = `${this.spriteSheet.pixelSize*row}px`;
+        wonder.style.left = `${this.spriteSheet.pixelSize*col}px`;
         wonder.style.opacity=1;
     }
 

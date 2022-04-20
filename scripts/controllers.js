@@ -18,20 +18,20 @@ class GameController{
         view.showForeground();
     }
 
-    movePlayer(xChange, yChange, initialize = false){
+    movePlayer(rowChange, colChange, initialize = false){
         let collide = false 
         const player = this.models.player
         
         if(!initialize){
             const board = this.models.board;
-            collide = board.checkCollision(player.x+xChange, player.y+yChange);
+            collide = board.checkCollision(player.row+rowChange, player.col+colChange);
         }        
 
         if(collide){
-            this.views.bumpPlayer(xChange, yChange);
+            this.views.bumpPlayer(rowChange, colChange);
         }else{
-            this.models.movePlayer(xChange, yChange)
-            this.views.movePlayer(player.x, player.y);
+            this.models.movePlayer(rowChange, colChange)
+            this.views.movePlayer(player.row, player.col);
         }
     }
 
@@ -45,25 +45,25 @@ class GameController{
         document.addEventListener('keydown', e =>{       
             switch (e.code){
                 case 'ArrowDown': case 'Numpad2': case 'KeyJ': case 'KeyS':
-                    this.movePlayer(0,1);
+                    this.movePlayer(1,0);
                     break;
                 case 'ArrowUp': case 'Numpad8': case 'KeyK': case 'KeyW':
-                        this.movePlayer(0,-1);
+                        this.movePlayer(-1,0);
                     break;
                 case 'ArrowRight': case 'Numpad6': case 'KeyL': case 'KeyD':
-                        this.movePlayer(1,0);
+                        this.movePlayer(0,1);
                     break;
                 case 'ArrowLeft': case 'Numpad4': case 'KeyH': case 'KeyA':
-                        this.movePlayer(-1,0);
+                        this.movePlayer(0,-1);
                     break;
                 case 'Numpad7': case 'KeyY':
                         this.movePlayer(-1,-1);
                     break;
                 case 'Numpad9': case 'KeyU':
-                        this.movePlayer(1,-1);
+                        this.movePlayer(-1,1);
                     break;
                 case 'Numpad1': case 'KeyB':
-                        this.movePlayer(-1,1);
+                        this.movePlayer(1,-1);
                     break;
                 case 'Numpad3': case 'KeyN':
                         this.movePlayer(1,1);

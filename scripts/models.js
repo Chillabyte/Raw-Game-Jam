@@ -5,28 +5,28 @@ class Models{
         this.board = new GameBoardModel();
     }
 
-    movePlayer(xChange, yChange){
-        this.player.x += xChange;
-        this.player.y += yChange;
+    movePlayer(rowChange, colChange){
+        this.player.row += rowChange;
+        this.player.col += colChange;
     }
 
     initializeBoard(boardView, mapName){
         let boardMap = this.maps[mapName];
         this.board.height = boardMap.length;
         this.board.width = boardMap[0].length;
-        for(let y=0; y<this.board.height; y++){
-            const row = document.createElement("div");
-            row.setAttribute("id", `row-${y}`);
-            row.setAttribute("class", "row");
-            boardView.appendChild(row);
-            for(let x=0; x<this.board.width; x++){
+        for(let row=0; row<this.board.height; row++){
+            const rowDiv = document.createElement("div");
+            rowDiv.setAttribute("id", `row-${row}`);
+            rowDiv.setAttribute("class", "row");
+            boardView.appendChild(rowDiv);
+            for(let col=0; col<this.board.width; col++){
                 const randNum = Math.floor(Math.random() * 4);
                 const randRotation = Math.floor(Math.random() * 4);
                 const cell = document.createElement("div");
-                cell.setAttribute("id", `cell-${x}-${y}`);
-                console.log("x=[" + x + "] y=[" + y + "] value=[" + boardMap[x][y] + "]");
+                cell.setAttribute("id", `cell-${row}-${col}`);
+                console.log(`row: ${row} col:${col}`);
                 //add background information
-                switch(boardMap[x][y]) {
+                switch(boardMap[row][col]) {
                     case '#': 
                         cell.setAttribute("class", `tile rotate_${randRotation}`);
                         cell.setAttribute("data-collision", "blocked");
@@ -38,10 +38,10 @@ class Models{
                         cell.setAttribute("data-sprite", `floor_${randNum}`);
                 }
                 //add background information
-                switch(boardMap[x][y]) {
+                switch(boardMap[row][col]) {
                     case 'p':
-                        this.player.x = x;
-                        this.player.y = y;
+                        this.player.row = row;
+                        this.player.col = col;
                         break;
                     case 'w':
                         cell.setAttribute("data-wonder", "ant");
@@ -52,7 +52,7 @@ class Models{
                         document.getElementById('foreground-container')
                         break;
                 }
-                row.appendChild(cell);
+                rowDiv.appendChild(cell);
             }
         }
     }
@@ -66,8 +66,8 @@ class GameBoardModel{
         this.openTiles;
     }
 
-    checkCollision(YDestination, XDestination){
-        const destinationCell = document.getElementById(`cell-${XDestination}-${YDestination}`);
+    checkCollision(rowDestination, colDestination){
+        const destinationCell = document.getElementById(`cell-${rowDestination}-${colDestination}`);
         const collision = destinationCell.getAttribute("data-collision");
         return collision != "none"
     }
@@ -75,8 +75,8 @@ class GameBoardModel{
 
 class PlayerModel{
     constructor(){
-        this.x = 0;
-        this.y = 0;
+        this.row = 0;
+        this.col = 0;
     }
 }
 
