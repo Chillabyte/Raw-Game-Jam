@@ -44,16 +44,16 @@ class GameController{
     keydownEvents(){
         document.addEventListener('keydown', e =>{       
             switch (e.code){
-                case 'ArrowDown': case 'Numpad2': case 'KeyJ':
+                case 'ArrowDown': case 'Numpad2': case 'KeyJ': case 'KeyS':
                     this.movePlayer(0,1);
                     break;
-                case 'ArrowUp': case 'Numpad8': case 'KeyK':
+                case 'ArrowUp': case 'Numpad8': case 'KeyK': case 'KeyW':
                         this.movePlayer(0,-1);
                     break;
-                case 'ArrowRight': case 'Numpad6': case 'KeyL':
+                case 'ArrowRight': case 'Numpad6': case 'KeyL': case 'KeyD':
                         this.movePlayer(1,0);
                     break;
-                case 'ArrowLeft': case 'Numpad4': case 'KeyH':
+                case 'ArrowLeft': case 'Numpad4': case 'KeyH': case 'KeyA':
                         this.movePlayer(-1,0);
                     break;
                 case 'Numpad7': case 'KeyY':
