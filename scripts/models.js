@@ -51,6 +51,10 @@ class Models{
                         cell.setAttribute("data-artifact", "chest");
                         document.getElementById('foreground-container')
                         break;
+                    case '?':
+                        cell.setAttribute("data-mystery", "mystery");
+                        document.getElementById('foreground-container')
+                        break;
                 }
                 rowDiv.appendChild(cell);
             }
@@ -77,6 +81,23 @@ class PlayerModel{
     constructor(){
         this.row = 0;
         this.col = 0;
+        this.maxResolve = 100;
+        this.currentResolve = 100;
+        this.artifacts = 0;
+        this.maxWonder = 10;
+        this.currentWonder = 0;
+    }
+    updateResolve(){
+        this.currentResolve--;
+        document.getElementById("resolvePoints").innerText="Resolve: " + this.currentResolve + "/" + this.maxResolve;
+    }
+    updateArtifactPoints(){
+        this.artifacts++;
+        document.getElementById("artifactPoints").innerText="Artifacts: " + this.artifacts;
+    }
+    updateWonderPoints(){
+        this.currentWonder++;
+        document.getElementById("wonderPoints").innerText="Wonder: " + this.currentWonder + "/" + this.maxWonder;
     }
 }
 
@@ -87,7 +108,7 @@ class Maps{
             ['#', '#', '#', '#', '#'],
             ['#', 'p', 'w', 'a', '#'],
             ['#', ' ', ' ', ' ', '#'],
-            ['#', ' ', ' ', ' ', '#'],
+            ['#', ' ', '?', ' ', '#'],
             ['#', ' ', ' ', ' ', '#'],
             ['#', '#', '#', '#', '#']
         ],

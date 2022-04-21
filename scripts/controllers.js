@@ -30,12 +30,11 @@ class GameController{
         if(collide){
             this.views.bumpPlayer(rowChange, colChange);
         }else{
-            this.models.movePlayer(rowChange, colChange)
+            this.models.movePlayer(rowChange, colChange);
             this.views.movePlayer(player.row, player.col);
+            this.models.player.updateResolve();
         }
     }
-
-
 
     addEventListeners(){
         this.keydownEvents();
@@ -67,6 +66,15 @@ class GameController{
                     break;
                 case 'Numpad3': case 'KeyN':
                         this.movePlayer(1,1);
+                    break;
+                case "Space":
+                    let oneOrZero = (Math.random()>=0.5)? 1 : 0;
+                    if(oneOrZero){
+                        this.models.player.updateArtifactPoints();
+                    }
+                    else{
+                        this.models.player.updateWonderPoints();
+                    }
                     break;
                 default:
                     break;

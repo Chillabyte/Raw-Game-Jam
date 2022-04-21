@@ -51,6 +51,14 @@ class Views {
         wonder.style.top = `${this.spriteSheet.pixelSize*row}px`;
         wonder.style.left = `${this.spriteSheet.pixelSize*col}px`;
         wonder.style.opacity=1;
+
+        let mysteryLocation = document.querySelectorAll(`[data-mystery="question"`);
+        row=mysteryLocation[0].id.split("-")[1];
+        col=mysteryLocation[0].id.split("-")[2];
+        const mystery = this.elements.mystery;
+        mystery.style.top = `${this.spriteSheet.pixelSize*row}px`;
+        mystery.style.left = `${this.spriteSheet.pixelSize*col}px`;
+        mystery.style.opacity=1;
     }
 
     showAllSprites(){
@@ -85,6 +93,7 @@ class HtmlElements {
         this.gameBoard = document.getElementById("game-board-container");
         this.artifact = document.getElementById("artifact");
         this.wonder=document.getElementById("wonder");
+        this.mystery=document.getElementById("mystery");
     }
 }
 
@@ -105,7 +114,8 @@ class SpriteSheet {
             'floor_2': { row:6, col: 2 },
             'floor_3': { row:6, col: 3 },
             'ant': {row: 12, col: 0},
-            'chest':{row: 3, col: 4}
+            'chest':{row: 3, col: 4},
+            'question':{row:0, col: 0}
         }
     }
 }
