@@ -52,7 +52,7 @@ class Models{
                         document.getElementById('foreground-container')
                         break;
                     case '?':
-                        cell.setAttribute("data-mystery", "mystery");
+                        cell.setAttribute("data-mystery", "question");
                         document.getElementById('foreground-container')
                         break;
                 }
