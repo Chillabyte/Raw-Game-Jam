@@ -99,17 +99,27 @@ class PlayerModel {
     updateResolve() {
         this.currentResolve--;
         document.getElementById("resolvePoints").innerText = "Resolve: " + this.currentResolve + "/" + this.maxResolve;
+        if (this.currentResolve <= 0) {
+            var audio = new Audio('assets/emptyResolveSound.ogg');
+            audio.play();
+        }
     }
     updateArtifactPoints() {
         this.artifacts++;
+        var audio = new Audio('assets/artifactSound.ogg');
+        audio.play();
         document.getElementById("artifactPoints").innerText = "Artifacts: " + this.artifacts;
     }
     updateWonderPoints() {
         this.currentWonder++;
+        var audio = new Audio('assets/wonderSound.ogg');
+        audio.play();
         document.getElementById("wonderPoints").innerText = "Wonder: " + this.currentWonder + "/" + this.maxWonder;
     }
     updateFloor() {
         this.currentFloor++;
+        var audio = new Audio('assets/stairsSound.ogg');
+        audio.play();
         document.getElementById("floorDisplay").innerText = "Floor: " + this.currentFloor;
     }
 }
