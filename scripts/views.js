@@ -44,13 +44,21 @@ class Views {
         artifact.style.left = `${this.spriteSheet.pixelSize*col}px`;
         artifact.style.opacity=1;
 
-        let wonderLocation = document.querySelectorAll(`[data-wonder="ant"`);
+        let wonderLocation = document.querySelectorAll(`[data-wonder="question"`);
         row=wonderLocation[0].id.split("-")[1];
         col=wonderLocation[0].id.split("-")[2];
         const wonder = this.elements.wonder;
         wonder.style.top = `${this.spriteSheet.pixelSize*row}px`;
         wonder.style.left = `${this.spriteSheet.pixelSize*col}px`;
-        wonder.style.opacity=1;
+        wonder.style.opacity = 1;
+
+        let stairsLocation = document.querySelectorAll(`[data-stairs="question"`);
+        row = stairsLocation[0].id.split("-")[1];
+        col = stairsLocation[0].id.split("-")[2];
+        const stairs = this.elements.stairs;
+        stairs.style.top = `${this.spriteSheet.pixelSize * row}px`;
+        stairs.style.left = `${this.spriteSheet.pixelSize * col}px`;
+        stairs.style.opacity = 1;
 
         let mysteryLocation = document.querySelectorAll(`[data-mystery="question"`);
         row=mysteryLocation[0].id.split("-")[1];
@@ -92,6 +100,7 @@ class HtmlElements {
         this.player = document.getElementById("player");
         this.gameBoard = document.getElementById("game-board-container");
         this.artifact = document.getElementById("artifact");
+        this.stairs = document.getElementById("stairs");
         this.wonder=document.getElementById("wonder");
         this.mystery=document.getElementById("mystery");
     }
@@ -112,10 +121,11 @@ class SpriteSheet {
             'floor_0': { row:6, col: 0 },
             'floor_1': { row:6, col: 1 },
             'floor_2': { row:6, col: 2 },
-            'floor_3': { row:6, col: 3 },
+            'floor_3': { row: 6, col: 3 },
+            'stairs': { row: 5, col: 0 },
             'ant': {row: 12, col: 0},
             'chest':{row: 3, col: 4},
-            'question':{row:0, col: 0}
+            'question':{row:7, col: 5}
         }
     }
 }

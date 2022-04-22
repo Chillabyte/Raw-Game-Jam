@@ -11,6 +11,7 @@ class GameController{
         this.movePlayer(0,0,true);
         this.models.blockedTiles = document.getElementsByClassName("blocked");
         this.models.openTiles = document.getElementsByClassName("open");
+        this.models.blockedTiles = document.getElementsByClassName("mystery");
         const view = this.views;
         setTimeout(function(){ view.playerVisible(true); }, transitionTime * 1000);
         view.showGameBoard(this.models.board.width, this.models.board.height);
@@ -27,12 +28,44 @@ class GameController{
             collide = board.checkCollision(player.row+rowChange, player.col+colChange);
         }        
 
-        if(collide){
-            this.views.bumpPlayer(rowChange, colChange);
-        }else{
-            this.models.movePlayer(rowChange, colChange);
-            this.views.movePlayer(player.row, player.col);
-            this.models.player.updateResolve();
+        switch (collide) {
+            case "blocked":
+                this.views.bumpPlayer(rowChange, colChange);
+                break;
+            case "mystery":
+                this.models.movePlayer(rowChange, colChange);
+                this.views.movePlayer(player.row, player.col);
+                this.models.player.updateResolve();
+                let oneOrZero = (Math.random() >= 0.5) ? 1 : 0;
+                if (oneOrZero) {
+                    this.models.player.updateArtifactPoints();
+                }
+                else {
+                    this.models.player.updateWonderPoints();
+                }
+                break;
+            case "stairs":
+                this.models.movePlayer(rowChange, colChange);
+                this.views.movePlayer(player.row, player.col);
+                this.models.player.updateResolve();
+                this.models.player.updateFloor();
+                break;
+            case "wonder":
+                this.models.movePlayer(rowChange, colChange);
+                this.views.movePlayer(player.row, player.col);
+                this.models.player.updateResolve();
+                this.models.player.updateWonderPoints();
+                break;
+            case "artifact":
+                this.models.movePlayer(rowChange, colChange);
+                this.views.movePlayer(player.row, player.col);
+                this.models.player.updateResolve();
+                this.models.player.updateArtifactPoints();
+                break;
+            default:
+                this.models.movePlayer(rowChange, colChange);
+                this.views.movePlayer(player.row, player.col);
+                this.models.player.updateResolve();
         }
     }
 
