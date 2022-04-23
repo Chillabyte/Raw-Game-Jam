@@ -4,8 +4,14 @@ class Views {
         this.spriteSheet = new SpriteSheet(tilePixelSize, spriteSheetUrl);
     }
 
-    playerVisible(visible) {
-        this.elements.player.style.opacity = visible ? 1 : 0;
+    mobileTilesVisible(visible) {
+        const mobileTiles = document.querySelectorAll(".mobile");
+        mobileTiles.forEach(function(tile){
+            if(visible)
+                tile.classList.add('animate');
+            else
+                tile.classList.remove('animate');
+        })
     }
 
     movePlayer(row, col) {
@@ -35,38 +41,30 @@ class Views {
     }
 
     showForeground(){
+        //Hide all the elements to start with. That way unused elements don't continue to show.
+        const foregroundElements = document.querySelectorAll(`.foreground`);
+        foregroundElements.forEach(element => {
+            element.style.top = `0px`;
+            element.style.left = `0px`;
+            element.style.opacity=0;
+        });
+        this.showForegroundElement("player");
+        this.showForegroundElement("artifact");
+        this.showForegroundElement("wonder");
+        this.showForegroundElement("stairs");
+        this.showForegroundElement("mystery");
+    }
 
-        let artifactLocation = document.querySelectorAll(`[data-artifact="chest"`);
-        let row=artifactLocation[0].id.split("-")[1];
-        let col=artifactLocation[0].id.split("-")[2];
-        const artifact = this.elements.artifact;
-        artifact.style.top = `${this.spriteSheet.pixelSize*row}px`;
-        artifact.style.left = `${this.spriteSheet.pixelSize*col}px`;
-        artifact.style.opacity=1;
-
-        let wonderLocation = document.querySelectorAll(`[data-wonder="question"`);
-        row=wonderLocation[0].id.split("-")[1];
-        col=wonderLocation[0].id.split("-")[2];
-        const wonder = this.elements.wonder;
-        wonder.style.top = `${this.spriteSheet.pixelSize*row}px`;
-        wonder.style.left = `${this.spriteSheet.pixelSize*col}px`;
-        wonder.style.opacity = 1;
-
-        let stairsLocation = document.querySelectorAll(`[data-stairs="question"`);
-        row = stairsLocation[0].id.split("-")[1];
-        col = stairsLocation[0].id.split("-")[2];
-        const stairs = this.elements.stairs;
-        stairs.style.top = `${this.spriteSheet.pixelSize * row}px`;
-        stairs.style.left = `${this.spriteSheet.pixelSize * col}px`;
-        stairs.style.opacity = 1;
-
-        let mysteryLocation = document.querySelectorAll(`[data-mystery="question"`);
-        row=mysteryLocation[0].id.split("-")[1];
-        col=mysteryLocation[0].id.split("-")[2];
-        const mystery = this.elements.mystery;
-        mystery.style.top = `${this.spriteSheet.pixelSize*row}px`;
-        mystery.style.left = `${this.spriteSheet.pixelSize*col}px`;
-        mystery.style.opacity=1;
+    showForegroundElement(elementName){
+        let elementLocation = document.querySelectorAll(`[data-foreground_element="${elementName}"`);
+        if(elementLocation.length > 0){
+            let row=elementLocation[0].id.split("-")[1];
+            let col=elementLocation[0].id.split("-")[2];
+            const element = this.elements[elementName];
+            element.style.top = `${this.spriteSheet.pixelSize*row}px`;
+            element.style.left = `${this.spriteSheet.pixelSize*col}px`;
+            element.style.opacity=1;
+        }
     }
 
     showAllSprites(){

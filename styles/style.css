@@ -5,14 +5,20 @@
     background-image: url(../assets/background.png);
 
 }
-.row{
-    display: flex;
+#overlay{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: saddlebrown;
+    z-index: 100;
+    transition: .5s;
 }
 
 /* Tiles */
 #player, #wonder, #artifact, #stairs, #mystery{
-    transition: ease-in-out .25s;
-    opacity: 0;
     border: 0;
     z-index: 50;
     position: absolute;
@@ -20,6 +26,15 @@
     top: 0px;
     left: 0px;
 }
+
+.animate{
+    transition: ease-in-out .25s;
+}
+
+.row{
+    display: flex;
+}
+
 .tile{
     image-rendering: pixelated;
     z-index: 0;    
