@@ -27,6 +27,9 @@
     left: 0px;
 }
 
+#player{
+    z-index: 51;
+}
 .animate{
     transition: ease-in-out .25s;
 }
