@@ -120,7 +120,7 @@ class PlayerModel {
         this.currentFloor++;
         var audio = new Audio('assets/stairsSound.ogg');
         audio.play();
-        document.getElementById("floorDisplay").innerText = "Floor: " + this.currentFloor;
+        document.getElementById("floorDisplay").innerText = `Floor:  ${1+this.currentFloor}`;
     }
 }
 
