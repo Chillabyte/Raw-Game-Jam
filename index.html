@@ -3,28 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Knewave&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
     <title>Document</title>
 </head>
 <body>
-    <div class = "hud">
-        <div id="floorDisplay" class="stat">Floor: 1</div>
-        <div id="resolvePoints" class ="stat">Resolve: </div>
-        <div id="artifactPoints" class ="stat">Artifacts: </div>
-        <div id="wonderPoints" class ="stat">Wonder: </div>
-
+    <div class="outer-container">
+        <div class = "hud">
+            <h2 id="floorDisplay" class="hud-item">Floor: 1</h2>
+            <div id="resolvePoints" class ="hud-item stat">Resolve: </div>
+            <div id="artifactPoints" class ="hud-item stat">Artifacts: </div>
+            <div id="wonderPoints" class ="hud-item stat">Wonder: </div>
+        </div>
+        <div id="game-board-container">
+            <div id="overlay"></div>
+            <div id="foreground-container">
+                <div class="tile mobile animate foreground" id="player" data-sprite="player"></div>
+                <div class="tile foreground" id="wonder" data-sprite="question"></div>
+                <div class="tile foreground" id="artifact" data-sprite="chest"></div>
+                <div class="tile foreground" id="stairs" data-sprite="question"></div>
+                <div class = "tile foreground" id="mystery" data-sprite="question"></div>
+            </div>       
+        </div>
     </div>
-    <div id="game-board-container">
-        <div id="overlay"></div>
-        <div id="foreground-container">
-            <div class="tile mobile animate foreground" id="player" data-sprite="player"></div>
-            <div class="tile foreground" id="wonder" data-sprite="question"></div>
-            <div class="tile foreground" id="artifact" data-sprite="chest"></div>
-            <div class="tile foreground" id="stairs" data-sprite="question"></div>
-            <div class = "tile foreground" id="mystery" data-sprite="question"></div>
-        </div>       
-    </div>
-
     <script src="scripts/models.js"></script>
     <script src="scripts/views.js"></script>
     <script src="scripts/controllers.js"></script>
