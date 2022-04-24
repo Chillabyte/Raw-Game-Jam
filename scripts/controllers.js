@@ -3,6 +3,7 @@ class GameController{
         this.addEventListeners();
         this.views = new Views(tilePixelSize, '..//assets//SpriteSheet.png');
         this.models = new Models();
+        this.firstKeyPress = true;
     }
 
     loadFloor(){
@@ -82,6 +83,10 @@ class GameController{
 
     keydownEvents() {
         document.addEventListener('keydown', e =>{ 
+            if (this.firstKeyPress){
+                this.models.updateBackgroundMusic(true);
+                this.firstKeyPress = false;
+            }
                 switch (e.code){
                     case 'ArrowDown': case 'Numpad2': case 'KeyJ': case 'KeyS':
                         this.movePlayer(1,0);
