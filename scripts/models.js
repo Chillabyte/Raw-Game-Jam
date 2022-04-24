@@ -81,7 +81,7 @@ class GameBoardModel {
     checkCollision(rowDestination, colDestination) {
         const destinationCell = document.getElementById(`cell-${rowDestination}-${colDestination}`);
         const collision = destinationCell.getAttribute("data-collision");
-        return collision;/* != "none"*/
+        return collision;
     }
 }
 
@@ -95,6 +95,7 @@ class PlayerModel {
         this.maxWonder = 10;
         this.currentWonder = 0;
         this.currentFloor = 0;
+        this.backgroundMusicIsPlaying = false;
     }
     updateResolve() {
         this.currentResolve--;
@@ -102,6 +103,13 @@ class PlayerModel {
         if (this.currentResolve <= 0) {
             var audio = new Audio('assets/emptyResolveSound.ogg');
             audio.play();
+        }
+        
+        if (!this.backgroundMusicIsPlaying) {
+            var audio = new Audio('assets/backgroundMusic.ogg');
+            audio.loop = true;
+            audio.play();
+            this.backgroundMusicIsPlaying = true;
         }
     }
     updateArtifactPoints() {
@@ -126,11 +134,11 @@ class PlayerModel {
 
 class Maps {
     constructor() {
+        this.possibleTiles = [' ', '#', 'p', 's', 'a', 'w', '?']
         this.levels = [
             [
                 ['#', '#', '#', '#', '#'],
                 ['#', 'p', 'w', 'a', '#'],
-                ['#', ' ', ' ', ' ', '#'],
                 ['#', ' ', '?', ' ', '#'],
                 ['#', ' ', ' ', 's', '#'],
                 ['#', '#', '#', '#', '#']
@@ -144,8 +152,6 @@ class Maps {
                 ['#', '#', '#', '#', '#']
             ],
             [
-
-
                 ['#', '#', '#', '#', '#', '#'],
                 ['#', 'p', ' ', ' ', 'a', '#'],
                 ['#', ' ', ' ', ' ', ' ', '#'],
@@ -155,7 +161,7 @@ class Maps {
                 ['#', '#', '#', '#', '#', '#']
             ],
             [
-                ['#', '#', '#', '#', '#', '#', '#', '#','#', '#', '#','#', '#', '#','#'],
+                ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
                 ['#', 'a', 'w', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '#'],
                 ['#', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', ' ', '  ', '#'],
                 ['#', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '#'],
@@ -169,8 +175,9 @@ class Maps {
                 ['#', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', ' ', '  ', '#'],
                 ['#', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '?', '#'],
                 ['#', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '#'],
-                ['#', '#', '#', '#', '#', '#', '#', '#' , '#', '#','#', '#', '#','#', '#']
+                ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#']
             ]
         ]
-    }    
+    }
+    
 }

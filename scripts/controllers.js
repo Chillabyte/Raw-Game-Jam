@@ -15,7 +15,7 @@ class GameController{
         this.views.showAllSprites();
         this.views.showForeground();
         document.querySelector("#overlay").style.opacity = 0;
-        setTimeout(()=>{ this.views.mobileTilesVisible(true); }, 500);
+        setTimeout(() => { this.views.mobileTilesVisible(true); }, 500);
     }
 
     movePlayer(rowChange, colChange, floorLoading = false){
@@ -26,7 +26,6 @@ class GameController{
             const board = this.models.board;
             collide = board.checkCollision(player.row+rowChange, player.col+colChange);
         }        
-
         switch (collide) {
             case "blocked":
                 this.views.bumpPlayer(rowChange, colChange);
@@ -49,7 +48,7 @@ class GameController{
                 this.models.player.updateResolve();
                 this.models.player.updateFloor();
                 document.querySelector("#overlay").style.opacity = 1;
-                setTimeout(()=>{ this.loadFloor(); }, 500);
+                setTimeout(() => { this.loadFloor(); }, 500);
                 break;
             case "wonder":
                 this.models.movePlayer(rowChange, colChange);
@@ -68,13 +67,23 @@ class GameController{
                 this.views.movePlayer(player.row, player.col);
                 this.models.player.updateResolve();
         }
+        if (this.models.player.currentResolve <= 0 || this.models.player.currentWonder >= this.models.player.maxWonder) {
+            this.models.player.currentResolve = this.models.player.maxResolve;
+            this.models.player.currentWonder = 0;
+            this.models.player.currentFloor = 0;
+            document.getElementById("floorDisplay").innerText = `Floor:  ${1 + this.models.player.currentFloor}`;
+            document.getElementById("resolvePoints").innerText = "Resolve: " + this.models.player.currentResolve + "/" + this.models.player.maxResolve;
+            document.getElementById("wonderPoints").innerText = "Wonder: " + this.models.player.currentWonder + "/" + this.models.player.maxWonder;
+            document.querySelector("#overlay").style.opacity = 1;
+            setTimeout(() => { this.loadFloor(); }, 500);
+        }
     }
 
     addEventListeners(){
         this.keydownEvents();
     }
 
-    keydownEvents(){
+    keydownEvents() {
         document.addEventListener('keydown', e =>{ 
                 switch (e.code){
                     case 'ArrowDown': case 'Numpad2': case 'KeyJ': case 'KeyS':
