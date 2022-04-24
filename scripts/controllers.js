@@ -2,7 +2,7 @@ class GameController{
     constructor(tilePixelSize){
         this.addEventListeners();
         this.views = new Views(tilePixelSize, '..//assets//SpriteSheet.png');
-        this.models = new Models(); 
+        this.models = new Models();
     }
 
     loadFloor(){
@@ -118,6 +118,10 @@ class GameController{
                         else{
                             this.models.player.updateWonderPoints();
                         }
+                        break;
+                    case 'KeyM':
+                        this.models.muted = !this.models.muted;
+                        this.models.updateBackgroundMusic();
                         break;
                     default:
                         break;
