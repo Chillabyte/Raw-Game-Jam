@@ -3,10 +3,9 @@ class Models {
         this.player = new PlayerModel();
         this.maps = new Maps();
         this.board = new GameBoardModel();
-        this.muted = false;
+        this.muted = true;
         this.backgroundMusic = new Audio('assets/backgroundMusic.ogg');
         this.backgroundMusic.loop = true;
-        this.backgroundMusic.play();
     }
 
     movePlayer(rowChange, colChange) {
@@ -23,6 +22,7 @@ class Models {
 
     initializeBoard(boardView, level) {
         this.board = new GameBoardModel();
+        this.player.initializeStats(false);
         const rows = document.querySelectorAll(".row");
         rows.forEach(row => row.remove());
         let boardMap = this.maps.levels[level];
@@ -101,44 +101,61 @@ class PlayerModel {
         this.row = 0;
         this.col = 0;
         this.maxResolve = 100;
-        this.currentResolve = 100;
-        this.artifacts = 0;
+        this.Resolve = 100;
+        this.Artifact = 0;
         this.maxWonder = 10;
-        this.currentWonder = 0;
-        this.currentFloor = 0;
-        this.muted = false;
+        this.Wonder = 0;
+        this.Floor = 1;
+        this.muted = true;
     }
+    initializeStats(playSound = true){
+        this.updateStat("Floor", 0, playSound);
+        this.updateStat("Artifact",0 ,playSound );
+        this.updateStat("Wonder", 0, playSound);
+        this.updateStat("Resolve", 0, playSound);
+    }
+    updateStat(stat, change, playSound = true){
+        this[stat] += change;
+        const additionalText = this[`max${stat}`] ? "/" + this[`max${stat}`] : "";
+        document.getElementById(`stat_${stat}`).innerText = `${stat}:  ${this[stat]}${additionalText}`;
 
-    updateResolve() {
-        this.currentResolve--;
-        document.getElementById("resolvePoints").innerText = "Resolve: " + this.currentResolve + "/" + this.maxResolve;
-        if (this.currentResolve <= 0) {
-            if(!this.muted)
-                var audio = new Audio('assets/emptyResolveSound.ogg');
-            audio.play();
+        if(!this.muted && playSound){
+                const audioTitle = this.Resolve > 0 ? stat : "ZeroResolve";
+                const audio = new Audio(`assets/${audioTitle}Sound.ogg`);
+                if(audio)
+                    audio.play();
         }
     }
-    updateArtifactPoints() {
-        this.artifacts++;
-        var audio = new Audio('assets/artifactSound.ogg');
-        if(!this.muted)
-            audio.play();
-        document.getElementById("artifactPoints").innerText = "Artifacts: " + this.artifacts;
-    }
-    updateWonderPoints() {
-        this.currentWonder++;
-        var audio = new Audio('assets/wonderSound.ogg');
-        if(!this.muted)
-            audio.play();
-        document.getElementById("wonderPoints").innerText = "Wonder: " + this.currentWonder + "/" + this.maxWonder;
-    }
-    updateFloor() {
-        this.currentFloor++;
-        var audio = new Audio('assets/stairsSound.ogg');
-        if(!this.muted)
-            audio.play();
-        document.getElementById("floorDisplay").innerText = `Floor:  ${1+this.currentFloor}`;
-    }
+    // updateResolve() {
+    //     this.currentResolve--;
+    //     document.getElementById("resolvePoints").innerText = "Resolve: " + this.currentResolve + "/" + this.maxResolve;
+    //     if (this.currentResolve <= 0) {
+    //         if(!this.muted)
+    //             var audio = new Audio('assets/resolveSound.ogg');
+    //         audio.play();
+    //     }
+    // }
+    // updateArtifactPoints() {
+    //     this.artifacts++;
+    //     var audio = new Audio('assets/artifactSound.ogg');
+    //     if(!this.muted)
+    //         audio.play();
+    //     document.getElementById("artifactPoints").innerText = "Artifacts: " + this.artifacts;
+    // }
+    // updateWonderPoints() {
+    //     this.currentWonder++;
+    //     var audio = new Audio('assets/wonderSound.ogg');
+    //     if(!this.muted)
+    //         audio.play();
+    //     document.getElementById("wonderPoints").innerText = "Wonder: " + this.currentWonder + "/" + this.maxWonder;
+    // }
+    // updateFloor() {
+    //     this.currentFloor++;
+    //     var audio = new Audio('assets/floorSound.ogg');
+    //     if(!this.muted)
+    //         audio.play();
+    //     document.getElementById("floorDisplay").innerText = `Floor:  ${1+this.currentFloor}`;
+    // }
 }
 
 class Maps {

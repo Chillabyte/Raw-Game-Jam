@@ -7,7 +7,7 @@ class GameController{
 
     loadFloor(){
         this.views.mobileTilesVisible(false);
-        this.models.initializeBoard(this.views.elements.gameBoard, this.models.player.currentFloor);
+        this.models.initializeBoard(this.views.elements.gameBoard, this.models.player.Floor-1);
         this.models.blockedTiles = document.getElementsByClassName("blocked");
         this.models.openTiles = document.getElementsByClassName("open");
         this.models.blockedTiles = document.getElementsByClassName("mystery");
@@ -25,6 +25,7 @@ class GameController{
         if(!floorLoading){
             const board = this.models.board;
             collide = board.checkCollision(player.row+rowChange, player.col+colChange);
+            this.models.player.updateStat("Resolve", -1);
         }        
         switch (collide) {
             case "blocked":
@@ -33,47 +34,43 @@ class GameController{
             case "mystery":
                 this.models.movePlayer(rowChange, colChange);
                 this.views.movePlayer(player.row, player.col);
-                this.models.player.updateResolve();
+                
                 let oneOrZero = (Math.random() >= 0.5) ? 1 : 0;
                 if (oneOrZero) {
-                    this.models.player.updateArtifactPoints();
+                    this.models.player.updateStat("Artifact", 1);
                 }
                 else {
-                    this.models.player.updateWonderPoints();
+                    this.models.player.updateStat("Wonder", 1);
                 }
                 break;
             case "stairs":
                 this.models.movePlayer(rowChange, colChange);
                 this.views.movePlayer(player.row, player.col);
-                this.models.player.updateResolve();
-                this.models.player.updateFloor();
+                this.models.player.updateStat("Floor", 1);
                 document.querySelector("#overlay").style.opacity = 1;
                 setTimeout(() => { this.loadFloor(); }, 500);
                 break;
             case "wonder":
                 this.models.movePlayer(rowChange, colChange);
                 this.views.movePlayer(player.row, player.col);
-                this.models.player.updateResolve();
-                this.models.player.updateWonderPoints();
+                this.models.player.updateStat("Wonder", 1);
                 break;
             case "artifact":
                 this.models.movePlayer(rowChange, colChange);
                 this.views.movePlayer(player.row, player.col);
-                this.models.player.updateResolve();
-                this.models.player.updateArtifactPoints();
+                this.models.player.updateStat("Artifact", 1);
                 break;
             default:
                 this.models.movePlayer(rowChange, colChange);
                 this.views.movePlayer(player.row, player.col);
-                this.models.player.updateResolve();
         }
         if (this.models.player.currentResolve <= 0 || this.models.player.currentWonder >= this.models.player.maxWonder) {
             this.models.player.currentResolve = this.models.player.maxResolve;
             this.models.player.currentWonder = 0;
             this.models.player.currentFloor = 0;
-            document.getElementById("floorDisplay").innerText = `Floor:  ${1 + this.models.player.currentFloor}`;
-            document.getElementById("resolvePoints").innerText = "Resolve: " + this.models.player.currentResolve + "/" + this.models.player.maxResolve;
-            document.getElementById("wonderPoints").innerText = "Wonder: " + this.models.player.currentWonder + "/" + this.models.player.maxWonder;
+            document.getElementById("stat_Floor").innerText = `Floor:  ${this.models.player.currentFloor}`;
+            document.getElementById("stat_Resolve").innerText = "Resolve: " + this.models.player.currentResolve + "/" + this.models.player.maxResolve;
+            document.getElementById("stat_Wonder").innerText = "Wonder: " + this.models.player.currentWonder + "/" + this.models.player.maxWonder;
             document.querySelector("#overlay").style.opacity = 1;
             setTimeout(() => { this.loadFloor(); }, 500);
         }
