@@ -82,12 +82,16 @@ class GameController{
     }
 
     keydownEvents() {
+        //Some browsers require user interaction to play sound, so we initialize the sound on the first key press.
         document.addEventListener('keydown', e =>{ 
             if (this.firstKeyPress){
                 this.models.updateBackgroundMusic(true);
                 this.firstKeyPress = false;
             }
-                switch (e.code){
+        }),
+
+        document.addEventListener('keydown', e =>{ 
+            switch (e.code){
                     case 'ArrowDown': case 'Numpad2': case 'KeyJ': case 'KeyS':
                         this.movePlayer(1,0);
                         break;

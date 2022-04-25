@@ -12,11 +12,15 @@ class Models {
         this.player.row += rowChange;
         this.player.col += colChange;
     }
-    updateBackgroundMusic(){
-        if (!this.muted) 
-           this.backgroundMusic.play();               
-        else
+    updateBackgroundMusic(initialize = false){
+        if (!this.muted || initialize){ 
+           this.backgroundMusic.play();
+           this.muted = false;         
+        }      
+        else{
             this.backgroundMusic.pause();
+            this.muted = true;
+        }
         this.player.muted = this.muted;
     }
 
