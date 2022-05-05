@@ -65,13 +65,13 @@ class GameController{
                 this.models.movePlayer(rowChange, colChange);
                 this.views.movePlayer(player.row, player.col);
         }
-        if (this.models.player.currentResolve <= 0 || this.models.player.currentWonder >= this.models.player.maxWonder) {
-            this.models.player.currentResolve = this.models.player.maxResolve;
-            this.models.player.currentWonder = 0;
-            this.models.player.currentFloor = 0;
-            document.getElementById("stat_Floor").innerText = `Floor:  ${this.models.player.currentFloor}`;
-            document.getElementById("stat_Resolve").innerText = "Resolve: " + this.models.player.currentResolve + "/" + this.models.player.maxResolve;
-            document.getElementById("stat_Wonder").innerText = "Wonder: " + this.models.player.currentWonder + "/" + this.models.player.maxWonder;
+        if (this.models.player.Resolve <= 0 || this.models.player.Wonder >= this.models.player.maxWonder) {
+            this.models.player.Resolve = this.models.player.maxResolve;
+            this.models.player.Wonder = 0;
+            this.models.player.Floor = 1;
+            document.getElementById("stat_Floor").innerText = `Floor:  ${this.models.player.Floor}`;
+            document.getElementById("stat_Resolve").innerText = "Resolve: " + this.models.player.Resolve + "/" + this.models.player.maxResolve;
+            document.getElementById("stat_Wonder").innerText = "Wonder: " + this.models.player.Wonder + "/" + this.models.player.maxWonder;
             document.querySelector("#overlay").style.opacity = 1;
             setTimeout(() => { this.loadFloor(); }, 500);
         }

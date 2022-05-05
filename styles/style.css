@@ -10,9 +10,36 @@ body{
     background-image: url(../assets/background.png);
 
 }
+.header-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.leftcolumn{
+    grid-column: 1/2;
+}
 .hud{
     display: grid;
     justify-content: center;
+    grid-column: 2/3;
+}
+.shop-container{
+    grid-column: 3/4;
+}
+.shop-title{
+    display: grid;
+    justify-content: center;
+}
+.shop{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+}
+
+#shop_Resolve{
+grid-column: 1/2;
+}
+#shop_Wonder{
+    grid-column: 2/3;
 }
 .stat{
     font-weight: bolder;
