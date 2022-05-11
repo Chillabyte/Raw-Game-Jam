@@ -132,16 +132,20 @@ class PlayerModel {
     }
 
     validateAsset(url){
-        fetch(
-            url,
-            { method: 'GET' }
-          )
-          .then(response => {
-            if (!response.ok) {
-              return false;
-            }
-            return true;
-          });
+        try{
+            fetch(
+                url,
+                { method: 'GET' }
+            )
+            .then(response => {
+                if (!response.ok) {
+                return false;
+                }
+                return true;
+            });
+        }catch{
+            return false;
+        }
     }
     // updateResolve() {
     //     this.currentResolve--;
