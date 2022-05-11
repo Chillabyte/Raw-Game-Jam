@@ -126,9 +126,16 @@ class PlayerModel {
         if(!this.muted && playSound){
                 const audioTitle = this.Resolve > 0 ? stat : "ZeroResolve";
                 const audio = new Audio(`assets/${audioTitle}Sound.ogg`);
-                if(audio)
+                if(validateAsset(audio.src))
                     audio.play();
         }
+    }
+
+    validateAsset(url){
+        var xhr = new XMLHttpRequest();
+        xhr.open('HEAD', url, false);
+        xhr.send();            
+        return (xhr.status != "404") ;    
     }
     // updateResolve() {
     //     this.currentResolve--;
