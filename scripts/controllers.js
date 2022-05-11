@@ -79,6 +79,11 @@ class GameController{
 
     addEventListeners(){
         this.keydownEvents();
+        
+        document.querySelector("#shop_Resolve_button").addEventListener("click", () => {
+            this.models.player.maxResolve = this.models.player.maxResolve + 10;
+            document.getElementById("stat_Resolve").innerText = "Resolve: " + this.models.player.Resolve + "/" + this.models.player.maxResolve;
+        });
     }
 
     keydownEvents() {
