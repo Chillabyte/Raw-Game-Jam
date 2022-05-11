@@ -132,10 +132,16 @@ class PlayerModel {
     }
 
     validateAsset(url){
-        var xhr = new XMLHttpRequest();
-        xhr.open('HEAD', url, false);
-        xhr.send();            
-        return (xhr.status != "404") ;    
+        fetch(
+            url,
+            { method: 'GET' }
+          )
+          .then(response => {
+            if (!response.ok) {
+              return false;
+            }
+            return true;
+          });
     }
     // updateResolve() {
     //     this.currentResolve--;
