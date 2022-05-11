@@ -126,7 +126,7 @@ class PlayerModel {
         if(!this.muted && playSound){
                 const audioTitle = this.Resolve > 0 ? stat : "ZeroResolve";
                 const audio = new Audio(`assets/${audioTitle}Sound.ogg`);
-                if(validateAsset(audio.src))
+                if(this.validateAsset(audio.src))
                     audio.play();
         }
     }
