@@ -147,40 +147,22 @@ class PlayerModel {
             return false;
         }
     }
-    // updateResolve() {
-    //     this.currentResolve--;
-    //     document.getElementById("resolvePoints").innerText = "Resolve: " + this.currentResolve + "/" + this.maxResolve;
-    //     if (this.currentResolve <= 0) {
-    //         if(!this.muted)
-    //             var audio = new Audio('assets/resolveSound.ogg');
-    //         audio.play();
-    //     }
-    // }
-    // updateArtifactPoints() {
-    //     this.artifacts++;
-    //     var audio = new Audio('assets/artifactSound.ogg');
-    //     if(!this.muted)
-    //         audio.play();
-    //     document.getElementById("artifactPoints").innerText = "Artifacts: " + this.artifacts;
-    // }
-    // updateWonderPoints() {
-    //     this.currentWonder++;
-    //     var audio = new Audio('assets/wonderSound.ogg');
-    //     if(!this.muted)
-    //         audio.play();
-    //     document.getElementById("wonderPoints").innerText = "Wonder: " + this.currentWonder + "/" + this.maxWonder;
-    // }
-    // updateFloor() {
-    //     this.currentFloor++;
-    //     var audio = new Audio('assets/floorSound.ogg');
-    //     if(!this.muted)
-    //         audio.play();
-    //     document.getElementById("floorDisplay").innerText = `Floor:  ${1+this.currentFloor}`;
-    // }
 }
 
 class Maps {
     constructor() {
+        var rows = 5;
+        var cols = 5;
+        var arr = Array.from(Array(rows), () => new Array(cols));
+        //create walls
+        for (let c = 0; c < cols; c++) {
+            //for (let r = 0; r < rows; r++) {
+                //if()
+                arr[0][c] = '#';
+                arr[cols-1][c] = '#';
+            //}
+          }
+        console.info(arr);
         this.possibleTiles = [' ', '#', 'p', 's', 'a', 'w', '?']
         this.levels = [
             [

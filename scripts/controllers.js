@@ -81,8 +81,20 @@ class GameController{
         this.keydownEvents();
         
         document.querySelector("#shop_Resolve_button").addEventListener("click", () => {
-            this.models.player.maxResolve = this.models.player.maxResolve + 10;
-            document.getElementById("stat_Resolve").innerText = "Resolve: " + this.models.player.Resolve + "/" + this.models.player.maxResolve;
+            if(this.models.player.Artifact >= 25){
+                this.models.player.maxResolve = this.models.player.maxResolve + 10;
+                document.getElementById("stat_Resolve").innerText = "Resolve: " + this.models.player.Resolve + "/" + this.models.player.maxResolve;
+                this.models.player.Artifact = this.models.player.Artifact - 25;
+                document.getElementById("stat_Artifact").innerText = "Artifact: " + this.models.player.Artifact;
+            }
+        });
+        document.querySelector("#shop_Wonder_button").addEventListener("click", () => {
+            if(this.models.player.Artifact >= 50){
+                this.models.player.maxWonder = this.models.player.maxWonder + 5;
+                document.getElementById("stat_Wonder").innerText = "Wonder: " + this.models.player.Wonder + "/" + this.models.player.maxWonder;
+                this.models.player.Artifact = this.models.player.Artifact - 50;
+                document.getElementById("stat_Artifact").innerText = "Artifact: " + this.models.player.Artifact;
+            }
         });
     }
 
